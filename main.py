@@ -41,6 +41,11 @@ def main():
         for object in updatable:
             object.update(dt)
 
+        for asteroid in asteroids:
+            if asteroid.collides_with(player):
+                print("Game over!")
+                exit()
+
         # Draw Elements
         screen.fill((0,0,0,0))
         for object in drawable:
@@ -52,7 +57,6 @@ def main():
 
         # Limit FPS to 60
         dt = clock.tick(60) / 1000
-        print(dt)
 
 
 if __name__ == "__main__":
