@@ -13,6 +13,12 @@ def main():
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
+    # init pygame groups
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+
+    Player.containers = (updatable, drawable)
+
     # setup clock
     clock = pygame.time.Clock()
     dt = 0
@@ -25,11 +31,13 @@ def main():
                 return
             
         # Update Elements
-        player.update(dt)
+        for object in updatable:
+            object.update(dt)
 
         # Draw Elements
         screen.fill((0,0,0,0))
-        player.draw(screen)
+        for object in drawable:
+            object.draw(screen)
 
 
         # Refresh display
